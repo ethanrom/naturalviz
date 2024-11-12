@@ -1,5 +1,5 @@
 def app_intro():
-  return """
+    return """
   <div style='text-align: left; padding: 20px; border-radius: 10px;'>
   <h1 style='text-align: center; color: #333;'>NaturalViz : Data Exploration and Visualization with NLP </h1>
   <h2 style='text-align: center; color: #666;'>Demo for Lablab.ai Mixtral hackathon </h2>

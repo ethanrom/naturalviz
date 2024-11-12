@@ -6,12 +6,11 @@ import streamlit as st
 from langchain_community.llms import HuggingFaceHub
 
 
-
 os.environ["HF_TOKEN"] == st.secrets["HF_TOKEN"]
 
 
 llm = HuggingFaceHub(
-    huggingfacehub_api_token = os.environ["HF_TOKEN"],
+    huggingfacehub_api_token=os.environ["HF_TOKEN"],
     repo_id="mistralai/Mixtral-8x7B-Instruct-v0.1",
     task="text-generation",
     model_kwargs={
@@ -33,6 +32,7 @@ def read_first_3_rows():
         first_3_rows = "Error: Dataset file not found."
 
     return first_3_rows
+
 
 def generate_plot(question):
     dataset_first_3_rows = read_first_3_rows()
@@ -76,7 +76,6 @@ Generated Python Code:
     return response
 
 
-
 def retry_generate_plot(question, error_message, error_code):
 
     dataset_first_3_rows = read_first_3_rows()
@@ -104,11 +103,10 @@ chart = alt.Chart(region_followers).mark_bar().encode(
 )
 
 # Display the chart
-st.altair_chart(chart, use_container_width=True)    
+st.altair_chart(chart, use_container_width=True)
 
 First 3 rows of the dataset:"""
     DATASET = f"{dataset_first_3_rows}"
-
 
     RETRY_TEMPLATE_SUFIX = """
 Objective: {question}
@@ -123,8 +121,13 @@ Corrected Code:
 """
 
     retry_template = RETRY_TEMPLATE_PREFIX + DATASET + RETRY_TEMPLATE_SUFIX
-    retry_prompt = PromptTemplate(template=retry_template, input_variables=["question", "error_message, error_code"])
+    retry_prompt = PromptTemplate(
+        template=retry_template,
+        input_variables=["question", "error_message, error_code"],
+    )
 
     llm_chain = LLMChain(prompt=retry_prompt, llm=llm)
-    response = llm_chain.predict(question=question, error_message=error_message, error_code=error_code)
+    response = llm_chain.predict(
+        question=question, error_message=error_message, error_code=error_code
+    )
     return response

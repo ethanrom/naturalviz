@@ -3,6 +3,7 @@ import pandas as pd
 import os
 import shutil
 
+
 def replace_default_dataset():
     # Replace dataset.csv with dataset_backup.csv
     dataset_backup_path = "dataset_backup.csv"
@@ -13,6 +14,7 @@ def replace_default_dataset():
         st.success("Default dataset applied successfully.")
     else:
         st.warning("Default dataset backup not found.")
+
 
 def save_uploaded_dataset(uploaded_file):
     # Save the uploaded dataset file and replace dataset.csv
